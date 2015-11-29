@@ -27,6 +27,7 @@ class ParseCommand extends Command
         $parseEngine = new \App\ParseEngine();
         $parseEngine->register('ANIMALS', new \App\Strategy\SortedUniqueStrategy);
         $parseEngine->register('NUMBERS', new \App\Strategy\UniqueCountStrategy);
+        $parseEngine->register('CARS', new \App\Strategy\ReverseSortedUniqueHashStrategy);
         $parseEngine->parseFile($filename);
         $out = $parseEngine->getResult();
 

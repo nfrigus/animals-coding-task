@@ -14,3 +14,4 @@ And example input files here: `doc/input-example`
 ## Usage
 
     php app.php parse doc/input-example/input.txt
+    php app.php parse doc/input-example/input2.txt
