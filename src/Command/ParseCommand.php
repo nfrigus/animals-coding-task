@@ -12,6 +12,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ParseCommand extends Command
 {
+    private $parse_engine;
+
+    public function __construct($engine)
+    {
+        $this->parse_engine = $engine;
+        return parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -20,16 +28,12 @@ class ParseCommand extends Command
             ->addArgument('file', InputArgument::REQUIRED, 'What do you want to parse?');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output)
     {
         $filename = $input->getArgument('file');
 
-        $parseEngine = new \App\ParseEngine();
-        $parseEngine->register('ANIMALS', new \App\Strategy\SortedUniqueStrategy);
-        $parseEngine->register('NUMBERS', new \App\Strategy\UniqueCountStrategy);
-        $parseEngine->register('CARS', new \App\Strategy\ReverseSortedUniqueHashStrategy);
-        $parseEngine->parseFile($filename);
-        $out = $parseEngine->getResult();
+        $this->parse_engine->parseFile($filename);
+        $out = $this->parse_engine->getResult();
 
         $output->write($out);
     }

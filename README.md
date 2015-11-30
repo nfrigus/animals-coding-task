@@ -15,3 +15,7 @@ And example input files here: `doc/input-example`
 
     php app.php parse doc/input-example/input.txt
     php app.php parse doc/input-example/input2.txt
+
+## Test
+
+    vendor/bin/phpunit --bootstrap app/loader.php test
