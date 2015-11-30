@@ -11,9 +11,8 @@ class UniqueCountStrategy implements StrategyInterface
 
     public function addItem($item)
     {
-        if (!isset($this->items[$item])) {
-            $this->items[$item] = 0;
-        }
+        isset($this->items[$item])
+            or $this->items[$item] = 0;
 
         return ++$this->items[$item];
     }

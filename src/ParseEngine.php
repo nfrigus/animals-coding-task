@@ -23,11 +23,9 @@ class ParseEngine
         $lines = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         foreach ($lines as $value) {
-            if (isset($this->strategies[$value])) {
-                $this->current_strategy = $this->strategies[$value];
-            } else {
-                $this->current_strategy->addItem($value);
-            }
+            isset($this->strategies[$value])
+                and $this->current_strategy = $this->strategies[$value]
+                or $this->current_strategy->addItem($value);
         }
     }
 
